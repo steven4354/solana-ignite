@@ -59,7 +59,7 @@ export const MintParser = (pubKey: PublicKey, info: AccountInfo<Buffer>) => {
     return details;
   } catch (e) {
     console.log("STEVENDEBUG MintParser error ", e)
-    return null
+    // return null
   }
 };
 
