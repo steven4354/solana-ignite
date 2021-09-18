@@ -1,0 +1,12 @@
+[programs.devnet]
+example1 = "GoNwXcZiHqWvYJNpCyUKa364uk5fUeKfG38HJp1fFrBe"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "devnet"
+wallet = "/Users/stevenli/.config/solana/id.json"
+
+[scripts]
+test = "mocha -t 1000000 tests/"
