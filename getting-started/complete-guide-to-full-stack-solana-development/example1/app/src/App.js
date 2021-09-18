@@ -23,6 +23,8 @@ const opts = {
 }
 const programID = new PublicKey(idl.metadata.address);
 
+console.log("programID ", programID)
+
 function App() {
   const [value, setValue] = useState(null);
   const wallet = useWallet();
