@@ -23,25 +23,35 @@ export default async function getGreetings(
   res: NextApiResponse<string | number>
 ) {
   try {
+    console.log("STEVENDEBUG getGreetings start ")
+
     const { greeter } = req.body;
+
+    console.log("STEVENDEBUG greeter ", greeter)
+
     const url = getSafeUrl();
     const connection = new Connection(url, "confirmed");
     const greeterPublicKey = new PublicKey(greeter);
 
     const accountInfo = await connection.getAccountInfo(greeterPublicKey);
 
+    console.log("STEVENDEBUG accountInfo ", accountInfo)
+
     if (accountInfo === null) {
       throw new Error('Error: cannot find the greeted account');
     }
 
     // Find the expected parameters.
-    const greeting = borsh.deserialize(undefined)
+    const greeting = borsh.deserialize(GreetingSchema,
+      GreetingAccount,
+      accountInfo.data
+    )
 
     // A short helper
     console.log(greeting)
 
     // Pass down the counter
-    res.status(200).json(undefined);
+    res.status(200).json(greeting.counter);
   } catch(error) {
     console.error(error);
     res.status(500).json('Get Greeting failed');
